@@ -40,11 +40,11 @@ class Node:
             node.add_child(self)
 
     def depth_search(self, value, visited=set()):
-        if value not in visited:
-            visited.add(value)
-        return value
+        if self._value is value:
+            return self
+        visited.add(value)
         for child in self._children:
-            depth_search(child.value, visited)
+            child.depth_search(child.value, visited)
 
 
 # node1 = Node("root1")
