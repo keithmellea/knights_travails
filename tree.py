@@ -39,19 +39,23 @@ class Node:
         if node is not None:
             node.add_child(self)
 
-    def depth_search(self, value, visited=set()):
-        if self._value is value:
+    def depth_search(self, value):
+        if self._value == value:
             return self
-        visited.add(value)
         for child in self._children:
-            child.depth_search(child.value, visited)
+            node = child.depth_search(value)
+            if node is not None:
+                return node
+
+    def breadth_search(self, value):
 
 
-# node1 = Node("root1")
+node1 = Node("root1")
 # node2 = Node("root2")
-# node3 = Node("root3")
+node3 = Node("root3")
 
-# node3.parent = node1
+node1.add_child(node3)
+print(node1.depth_search("root3"))
 # node3.parent = node2
 
 # print(node1.children)
