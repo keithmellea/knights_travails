@@ -16,3 +16,6 @@ class Node:
         self._children.append(node)
         if node not in self._children:
             self._parent = node
+
+    def add_parents(self):
+        return self._parent._value
