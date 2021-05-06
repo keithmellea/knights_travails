@@ -47,7 +47,20 @@ class Node:
             if node is not None:
                 return node
 
-    def breadth_search(self, value):
+    def breadth_search(self, value, queue=set()):
+
+        queue.append(self)
+
+        while queue:
+            node = queue.pop(0)
+
+            if node._value == value:
+                return node
+
+            for child in node.children:
+                queue.append(child)
+
+        return None
 
 
 node1 = Node("root1")
