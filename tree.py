@@ -18,7 +18,7 @@ class Node:
             node.parent = self
 
     def remove_child(self, node):
-        if node is in self._children:
+        if node in self._children:
             self._children.remove(node)
             node.parent = None
 
@@ -31,12 +31,20 @@ class Node:
 
     @parent.setter
     def parent(self, node):
-        if self._parent is None:
+        if self._parent is node:
             return
-        self._parent.remove_child(self)
+        if self._parent:
+            self._parent.remove_child(self)
         self._parent = node
         if node is not None:
             node.add_child(self)
+
+    def depth_search(self, value, visited=set()):
+        if value not in visited:
+            visited.add(value)
+        return value
+        for child in self._children:
+            depth_search(child.value, visited)
 
 
 # node1 = Node("root1")
