@@ -17,13 +17,18 @@ class Node:
         return self._parent
 
     def add_child(self, node):
-        self._children.append(node)
         if node not in self._children:
-            self._parent = node
-    
+            self._children.append(node)
+            node._parent = self._children
+
+    def remove_child(self, node):
+        self._children.pop(node)
+        node._parent = None
+
     def add_parents(self):
         return self._parent
 
     @parent.setter
     def parent(self, node):
-       return self._parent.add_child(self)
+        if self._parent:
+            self._parent.add_child(self)
